@@ -56,6 +56,8 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+        
+        pub.setItem("Mac", 2);
 
         currentRoom = outside;  // start game outside
     }
@@ -115,6 +117,9 @@ public class Game
                 goRoom(command);
                 break;
 
+            case LOOK:
+                look();
+                     
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -162,6 +167,14 @@ public class Game
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+    }
+    
+    /**
+     * 
+     */
+    private void look()
+    {
+        System.out.println(currentRoom.getLongDescription());
     }
 
     /** 
