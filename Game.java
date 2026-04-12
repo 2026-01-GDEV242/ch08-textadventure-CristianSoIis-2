@@ -52,6 +52,7 @@ public class Game
 
         pub.setExit("east", outside);
         pub.setItem("Hamburger", 2);
+        pub.setItem("Hotdog", 4);
 
         lab.setExit("north", outside);
         lab.setExit("east", office);
