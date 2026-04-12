@@ -199,7 +199,7 @@ public class Game
         else
         {
             System.out.println("You can't go backwards, you haven't moved yet");
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(currentRoom.getLongDescription()); 
         }
     }
 
