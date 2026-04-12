@@ -8,7 +8,7 @@
 public class Item
 {
     // instance variables - replace the example below with your own
-    private String descript;
+    private String itemDescription;
     private int weight;
 
     /**
@@ -16,9 +16,26 @@ public class Item
      */
     public Item(String text, int pounds)
     {
-        descript = text;
+        itemDescription = text;
         weight = pounds;
     }
     
-    //public String get 
+    /**
+     * 
+     */
+    public String getItemDescription()
+    {
+        return itemDescription;
+    }
+    
+    /**
+     * 
+     */
+    public int getWeight()
+    {
+        return weight;
+    }
+    
+    
+    
 }

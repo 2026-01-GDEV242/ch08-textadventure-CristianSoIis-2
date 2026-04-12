@@ -19,7 +19,7 @@ import java.util.Iterator;
 public class Room 
 {
     private String description;
-    private HashMap<String, Room> exits;        // stores exits of this room.
+    private HashMap<String, Room> exits; // stores exits of this room.
     private Item item;
     
     /**
@@ -32,7 +32,6 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
-
     }
 
     /**
@@ -62,10 +61,15 @@ public class Room
      */
     public String getLongDescription()
     {
-        //if(item != null)
-        //{
-           return "You are " + description + ".\n" + getExitString() + ".\n You see: "; 
-        //}
+        if(item != null)
+        {
+           return "You are " + description + ".\n" + getExitString() + ".\n You see:" + getItem(); 
+        }
+        
+        else
+        {
+            return "You are " + description + ".\n" + getExitString();
+        }
     }
 
     /**
@@ -99,9 +103,9 @@ public class Room
         item = new Item(object, pounds);
     } 
     
-    public Item getItem()
+    public String getItem()
     {
-        return item;
+        return item.getItemDescription() + " which weights " + item.getWeight() + " pounds";
     }
 
 }

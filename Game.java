@@ -51,13 +51,12 @@ public class Game
         theater.setExit("west", outside);
 
         pub.setExit("east", outside);
+        pub.setItem("Hamburger", 2);
 
         lab.setExit("north", outside);
         lab.setExit("east", office);
 
         office.setExit("west", lab);
-        
-        pub.setItem("Mac", 2);
 
         currentRoom = outside;  // start game outside
     }
