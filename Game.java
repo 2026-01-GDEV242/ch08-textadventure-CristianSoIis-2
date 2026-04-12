@@ -19,8 +19,7 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    //private Room previousRoom = null;
+    private Player player;
     private Stack<Room> text;
 
     /**
@@ -31,6 +30,7 @@ public class Game
         createRooms();
         parser = new Parser();
         text = new Stack<>();
+        //player = new Player();
     }
 
     /**
@@ -63,7 +63,7 @@ public class Game
 
         office.setExit("west", lab);
 
-        currentRoom = outside;  // start game outside
+        player = new Player(outside);  // start game outside
     }
 
     /**
@@ -94,7 +94,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
     /**
@@ -167,15 +167,15 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            text.push(currentRoom);
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            text.push(player.getCurrentRoom());
+            player.setCurrentRoom(nextRoom);
+            System.out.println(player.getCurrentRoom().getLongDescription());
         }
     }
     
@@ -184,7 +184,7 @@ public class Game
      */
     private void look()
     {
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
     
     private void goBack(Command command)
@@ -192,18 +192,18 @@ public class Game
         if(command.hasSecondWord() == true)
         {
             System.out.println("If you want to go back, please only enter back once");
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(player.getCurrentRoom().getLongDescription());
         }
         
         if(!text.isEmpty())
         {
-                currentRoom = text.pop();
-                System.out.println(currentRoom.getLongDescription());
+                player.setCurrentRoom(text.pop());
+                System.out.println(player.getCurrentRoom().getLongDescription());
         }
         else
         {
                 System.out.println("You have reach the starting point with no way to go back");
-                System.out.println(currentRoom.getLongDescription());
+                System.out.println(player.getCurrentRoom().getLongDescription());
         }
     }
 
