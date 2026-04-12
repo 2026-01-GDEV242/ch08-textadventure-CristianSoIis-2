@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room previousRoom = null;
         
     /**
      * Create the game and initialise its internal map.
@@ -119,10 +120,15 @@ public class Game
 
             case LOOK:
                 look();
+                break;
                      
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+                
+            case BACK:
+                 goBack(command);
+                 break;
         }
         return wantToQuit;
     }
@@ -164,6 +170,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            previousRoom = currentRoom;
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
@@ -175,6 +182,25 @@ public class Game
     private void look()
     {
         System.out.println(currentRoom.getLongDescription());
+    }
+    
+    private void goBack(Command command)
+    {
+        if(command.hasSecondWord() == true)
+        {
+            System.out.println("If you want to go back, please only enter back once");
+            System.out.println(currentRoom.getLongDescription());
+        }
+        else if(previousRoom != null)
+        {
+            currentRoom = previousRoom;
+            System.out.println(currentRoom.getLongDescription());
+        }
+        else
+        {
+            System.out.println("You can't go backwards, you haven't moved yet");
+            System.out.println(currentRoom.getLongDescription());
+        }
     }
 
     /** 
