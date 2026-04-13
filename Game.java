@@ -30,7 +30,6 @@ public class Game
         createRooms();
         parser = new Parser();
         text = new Stack<>();
-        //player = new Player();
     }
 
     /**
@@ -77,7 +76,8 @@ public class Game
         // execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) {
+        while (! finished) 
+        {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -131,6 +131,13 @@ public class Game
                 
             case BACK:
                  goBack(command);
+                 break;
+                 
+            case TAKE:
+                 take(command);
+                 break;
+                 
+            case DROP:
                  break;
         }
         return wantToQuit;
@@ -206,6 +213,33 @@ public class Game
                 System.out.println(player.getCurrentRoom().getLongDescription());
         }
     }
+
+     /*public ___ drop()
+    {
+        
+    }
+    */
+    
+    public String take(Command command)
+    {
+        if(command.hasSecondWord() == true)
+        {
+             if(command.getSecondWord().equals(currentRoom.get))
+             {
+                 System.out.println("The item " + ___ + " was found and stored");
+             }
+             
+             else
+             {
+                 System.out.println("Item can't be found in the room");
+             }
+        }
+        else
+        {
+            System.out.println("Please enter in another word so we can check if that item is here");
+        }
+    }
+    
 
     /** 
      * "Quit" was entered. Check the rest of the command to see

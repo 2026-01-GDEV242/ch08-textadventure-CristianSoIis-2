@@ -9,6 +9,7 @@ public class Player
 {
     // instance variables 
     private Room currentRoom;
+    private Item item;
 
 
     /**
@@ -29,22 +30,8 @@ public class Player
         currentRoom = spot;
     }
 
-    /*public ___ dropItem()
-    {
-        
-    }
     
-    public ___ pickUpItem()
-    {
-        if(weight)
-        {
-            
-        }
-        
-        else
-        {
-            
-        }
-    }
-    */
+    
+    
+    
 }
