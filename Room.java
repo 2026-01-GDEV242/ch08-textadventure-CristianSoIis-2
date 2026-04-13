@@ -19,7 +19,7 @@ import java.util.Iterator;
 public class Room 
 {
     private String description;
-    private HashMap<String, Room> exits; // stores exits of this room.
+    private HashMap <String, Room> exits; // stores exits of this room.
     private HashMap <String, Integer> item;
     
     /**
@@ -64,7 +64,7 @@ public class Room
     {
         if(item.size() != 0)
         {
-           return "You are " + description + ".\n" + getExitString() + ".\nYou see: " + getItem(); 
+           return "You are " + description + ".\n" + getExitString() + ".\nYou see: " + showItem(); 
         }
         
         else
@@ -104,7 +104,7 @@ public class Room
         item.put(object, pounds);
     }
     
-    public String getItem()
+    public String showItem()
     {
         String returnItem = "";
         Set<String> keys = item.keySet();
@@ -113,6 +113,20 @@ public class Room
         }
         return returnItem;
     }
-
+    
+    public String getItem(String itemToFind)
+    {
+        Integer itemWeight = null;
+        itemWeight = item.get(itemToFind);
+        if(itemWeight == null)
+        {
+            return null;
+        }
+        
+        else
+        {
+            return itemToFind;
+        }
+    }
 }
 

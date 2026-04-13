@@ -220,13 +220,14 @@ public class Game
     }
     */
     
-    public String take(Command command)
+    public void take(Command command)
     {
         if(command.hasSecondWord() == true)
         {
-             if(command.getSecondWord().equals(currentRoom.get))
+             String itemToGet = command.getSecondWord();
+             if(player.getCurrentRoom().getItem(itemToGet) != null)
              {
-                 System.out.println("The item " + ___ + " was found and stored");
+                 System.out.println("The item " + itemToGet + " was found and stored");
              }
              
              else
