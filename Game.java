@@ -166,7 +166,7 @@ public class Game
 
     /** 
      * Try to go in one direction, otherwise print an erro. If there is an exit, enter the new
-     * room and before changing room locaction, add the current spot in stack textr message. 
+     * room and before changing room locaction, add the current spot in stack text message. 
      * @param command The command to be processed.
      */
     private void goRoom(Command command) 

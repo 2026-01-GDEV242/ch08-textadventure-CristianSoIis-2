@@ -1,0 +1,10 @@
+/*
+Features that can be done
+GO("go")
+QUIT("quit")
+HELP("help")
+UNKNOWN("?")
+LOOK("look")
+BACK("back")
+TAKE("take")
+*/
