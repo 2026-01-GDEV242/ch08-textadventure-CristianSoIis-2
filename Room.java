@@ -12,8 +12,8 @@ import java.util.Iterator;
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Cristian Solis
+ * @version 2026.04.13
  */
 
 public class Room 
@@ -46,7 +46,7 @@ public class Room
     }
 
     /**
-     * @return The short description of the room
+     * @return The short description of the room.
      * (the one that was defined in the constructor).
      */
     public String getShortDescription()
@@ -58,7 +58,8 @@ public class Room
      * Return a description of the room in the form:
      *     You are in the kitchen.
      *     Exits: north west
-     * @return A long description of this room
+     * @return A long description of this room, if HashMap item has an item or more prints the items
+     * else prints it normally without trying to print items.
      */
     public String getLongDescription()
     {
@@ -74,7 +75,7 @@ public class Room
     }
 
     /**
-     * Return a string describing the room's exits, for example
+     * Return a string describing the room's exits, for example.
      * "Exits: north west".
      * @return Details of the room's exits.
      */
@@ -99,11 +100,21 @@ public class Room
         return exits.get(direction);
     }
     
+    /**
+     * Puts in a item inside the HashMap item with a String and int that will autocast to Integer
+     * @param object Name of the Item. 
+     * @param pounds Weight of the Item.
+     * 
+     */
     public void setItem(String object, int pounds)
     {
         item.put(object, pounds);
     }
     
+    /**
+     * Prints out the items in a room by going through item and using the key to get the Integer that will autocast to int.
+     * @return String text of the items and the name and weight of it.
+     */
     public String showItem()
     {
         String returnItem = "";
@@ -114,6 +125,12 @@ public class Room
         return returnItem;
     }
     
+    /**
+     * Gets the Integer in item with doing the key. Checks to see if the weight exists, so not 
+     * returns null else prints the name of Item showing it was found
+     * @param itemToFind Name of Item were trying to find.
+     * @return null if itemWeight == null else itemToFind
+     */
     public String getItem(String itemToFind)
     {
         Integer itemWeight = null;

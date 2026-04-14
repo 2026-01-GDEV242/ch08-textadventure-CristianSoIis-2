@@ -1,5 +1,4 @@
 import java.util.HashMap;
-
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.
@@ -7,8 +6,8 @@ import java.util.HashMap;
  * This class holds an enumeration of all command words known to the game.
  * It is used to recognise commands as they are typed in.
  *
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Cristian Solis
+ * @version 2026.04.13
  */
 
 public class CommandWords
@@ -23,8 +22,10 @@ public class CommandWords
     public CommandWords()
     {
         validCommands = new HashMap<>();
-        for(CommandWord command : CommandWord.values()) {
-            if(command != CommandWord.UNKNOWN) {
+        for(CommandWord command : CommandWord.values()) 
+        {
+            if(command != CommandWord.UNKNOWN) 
+            {
                 validCommands.put(command.toString(), command);
             }
         }
@@ -39,10 +40,13 @@ public class CommandWords
     public CommandWord getCommandWord(String commandWord)
     {
         CommandWord command = validCommands.get(commandWord);
-        if(command != null) {
+        if(command != null) 
+        {
             return command;
         }
-        else {
+        
+        else 
+        {
             return CommandWord.UNKNOWN;
         }
     }
@@ -61,7 +65,8 @@ public class CommandWords
      */
     public void showAll() 
     {
-        for(String command : validCommands.keySet()) {
+        for(String command : validCommands.keySet()) 
+        {
             System.out.print(command + "  ");
         }
         System.out.println();

@@ -12,8 +12,8 @@ import java.util.Stack;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Cristian Solis
+ * @version 2026.04.13
  */
 
 public class Game 
@@ -33,7 +33,8 @@ public class Game
     }
 
     /**
-     * Create all the rooms and link their exits together.
+     * Create all the rooms and link their exits together. 
+     * Along with adding items in the rooms.
      */
     private void createRooms()
     {
@@ -50,8 +51,10 @@ public class Game
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
+        outside.setItem("Apple", 3);
 
         theater.setExit("west", outside);
+        theater.setItem("Chair", 25);
 
         pub.setExit("east", outside);
         pub.setItem("Hamburger", 2);
@@ -59,8 +62,10 @@ public class Game
 
         lab.setExit("north", outside);
         lab.setExit("east", office);
+        lab.setItem("Book", 10);
 
         office.setExit("west", lab);
+        office.setItem("Tests", 5);
 
         player = new Player(outside);  // start game outside
     }
@@ -76,7 +81,7 @@ public class Game
         // execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) 
+        while (!finished) 
         {
             Command command = parser.getCommand();
             finished = processCommand(command);
@@ -108,7 +113,8 @@ public class Game
 
         CommandWord commandWord = command.getCommandWord();
 
-        switch (commandWord) {
+        switch (commandWord)
+        {
             case UNKNOWN:
                 System.out.println("I don't know what you mean...");
                 break;
@@ -144,7 +150,6 @@ public class Game
     }
 
     // implementations of user commands:
-
     /**
      * Print out some help information.
      * Here we print some stupid, cryptic message and a list of the 
@@ -160,26 +165,31 @@ public class Game
     }
 
     /** 
-     * Try to go in one direction. If there is an exit, enter the new
-     * room, otherwise print an error message.
+     * Try to go in one direction, otherwise print an erro. If there is an exit, enter the new
+     * room and before changing room locaction, add the current spot in stack textr message. 
+     * @param command The command to be processed.
      */
     private void goRoom(Command command) 
     {
-        if(!command.hasSecondWord()) {
+        if(!command.hasSecondWord()) 
+        {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
             return;
         }
-
+        
         String direction = command.getSecondWord();
 
         // Try to leave current room.
         Room nextRoom = player.getCurrentRoom().getExit(direction);
-
-        if (nextRoom == null) {
+        
+        if (nextRoom == null) 
+        {
             System.out.println("There is no door!");
         }
-        else {
+        
+        else 
+        {
             text.push(player.getCurrentRoom());
             player.setCurrentRoom(nextRoom);
             System.out.println(player.getCurrentRoom().getLongDescription());
@@ -187,13 +197,19 @@ public class Game
     }
     
     /**
-     * 
+     * Prints what is around in the room along with the exits, like if we just enter the room
      */
     private void look()
     {
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
     
+    /**
+     * Checks if a second word was typed and if so asks to only do it once and prints the current room info.
+     * If the stack text has a value, set's the players spot to that room and prints the current room info.
+     * Else says we are at the starting point and prints the current rooms info.
+     * @param command The command to be processed.
+     */
     private void goBack(Command command)
     {
         if(command.hasSecondWord() == true)
@@ -214,12 +230,18 @@ public class Game
         }
     }
 
-     /*public ___ drop()
+     /*public ___ drop() Didn't do just from time and ya
     {
         
     }
     */
     
+    /**
+     * Checks if there is a second word after command, if so gets the second word and stores it in a String value.
+     * Then checks if the current room has the item with weight to check for the item from a HashMap.
+     * If found prints we found it else prints we didn't. If there is no second word prints to put a second word.
+     * @param command The command to be processed.
+     */
     public void take(Command command)
     {
         if(command.hasSecondWord() == true)
@@ -240,11 +262,11 @@ public class Game
             System.out.println("Please enter in another word so we can check if that item is here");
         }
     }
-    
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
+     * @param command The command to be processed.
      * @return true, if this command quits the game, false otherwise.
      */
     private boolean quit(Command command) 
